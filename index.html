@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Сканворды">
+<meta name="theme-color" content="#f3ede1" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#17161a" media="(prefers-color-scheme: dark)">
+<meta name="format-detection" content="telephone=no">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="icon" href="icons/icon-192.png">
+<link rel="stylesheet" href="css/app.css">
+<title>Сканворды</title>
+</head>
+<body>
+<div id="app">
+  <header class="top">
+    <div class="brand">
+      <span class="logo" aria-hidden="true">Ск</span>
+      <div class="seg" id="lang-seg" role="group">
+        <button data-lang="ru">РУ</button><button data-lang="uk">УК</button>
+      </div>
+    </div>
+    <div class="timer" id="timer">0:00</div>
+    <nav class="tools">
+      <button class="tool" id="btn-reveal" aria-label="reveal">
+        <svg viewBox="0 0 24 24"><path d="M12 3a6 6 0 0 0-3.6 10.8c.6.5 1 1.2 1 2V17h5.2v-1.2c0-.8.4-1.5 1-2A6 6 0 0 0 12 3Zm-2.6 16h5.2v1.2a1 1 0 0 1-1 1h-3.2a1 1 0 0 1-1-1V19Z"/></svg>
+        <span class="lbl" data-t="reveal"></span><span class="badge" id="cnt-reveal">3</span>
+      </button>
+      <button class="tool" id="btn-check" aria-label="check">
+        <svg viewBox="0 0 24 24"><path d="M9.5 16.2 5.3 12l-1.4 1.4 5.6 5.6L20.1 8.4 18.7 7z"/></svg>
+        <span class="lbl" data-t="check"></span><span class="badge" id="cnt-check">3</span>
+      </button>
+      <span class="sep"></span>
+      <button class="tool" id="btn-new" aria-label="new">
+        <svg viewBox="0 0 24 24"><path d="M11 5h2v6h6v2h-6v6h-2v-6H5v-2h6z"/></svg>
+        <span class="lbl" data-t="newPuzzle"></span>
+      </button>
+      <button class="tool icon" id="btn-history" aria-label="history">
+        <svg viewBox="0 0 24 24"><path d="M13 3a9 9 0 0 0-9 9H1l3.9 3.9L9 12H6a7 7 0 1 1 2.05 4.95l-1.42 1.42A9 9 0 1 0 13 3Zm-1 5v5l4.3 2.5.7-1.2-3.5-2.1V8z"/></svg>
+      </button>
+      <button class="tool icon" id="btn-stats" aria-label="stats">
+        <svg viewBox="0 0 24 24"><path d="M5 20V10h3v10zm5.5 0V4h3v16zM16 20v-7h3v7z"/></svg>
+      </button>
+      <button class="tool icon" id="btn-settings" aria-label="settings">
+        <svg viewBox="0 0 24 24"><path d="M19.4 13a7.6 7.6 0 0 0 0-2l2.1-1.6-2-3.5-2.5 1a7.4 7.4 0 0 0-1.7-1L15 3.3h-4l-.4 2.6a7.4 7.4 0 0 0-1.7 1l-2.5-1-2 3.5L6.6 11a7.6 7.6 0 0 0 0 2l-2.1 1.6 2 3.5 2.5-1c.5.4 1.1.8 1.7 1l.4 2.6h4l.4-2.6c.6-.2 1.2-.6 1.7-1l2.5 1 2-3.5zM13 15.5A3.5 3.5 0 1 1 13 8.5a3.5 3.5 0 0 1 0 7z" transform="translate(-1 0)"/></svg>
+      </button>
+    </nav>
+  </header>
+
+  <div id="update-banner" class="banner" hidden>
+    <div class="banner-text"><b id="upd-title"></b> <span id="upd-notes"></span></div>
+    <button id="upd-later" class="btn ghost"></button>
+    <button id="upd-now" class="btn primary"></button>
+  </div>
+
+  <main class="board-area">
+    <div id="scroller"><div id="board"></div></div>
+    <div id="loading" hidden><div class="spinner"></div><div id="loading-text"></div></div>
+  </main>
+
+  <aside class="side">
+    <div class="cluebar">
+      <button class="nav" id="clue-prev" aria-label="prev">‹</button>
+      <div class="clue-now" id="clue-now"><span class="arr" id="clue-arr"></span><span id="clue-text"></span><span class="len" id="clue-len"></span></div>
+      <button class="nav" id="clue-next" aria-label="next">›</button>
+      <button class="nav kbd-toggle" id="kbd-toggle" aria-label="keyboard">
+        <svg viewBox="0 0 24 24"><path d="M3 6h18a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1Zm2 3v2h2V9zm4 0v2h2V9zm4 0v2h2V9zm4 0v2h2V9zM5 13v2h2v-2zm4 0v2h6v-2zm8 0v2h2v-2z"/></svg>
+      </button>
+    </div>
+    <div class="cluelist" id="cluelist"></div>
+    <div id="kbd" class="kbd"></div>
+  </aside>
+</div>
+
+<div id="toast" role="status" aria-live="polite"></div>
+
+<dialog id="dlg"><form method="dialog" class="dlg-body" id="dlg-body"></form></dialog>
+
+<script type="module" src="js/app.js"></script>
+</body>
+</html>

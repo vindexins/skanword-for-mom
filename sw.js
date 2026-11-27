@@ -1,6 +1,6 @@
 // Service Worker: офлайн-кэш приложения и управляемое обновление.
 // CACHE_VERSION меняется скриптом tools/bump-version.mjs.
-const CACHE_VERSION = '1.0.0';
+const CACHE_VERSION = '1.1.0';
 const CACHE = 'skanword-' + CACHE_VERSION;
 const ASSETS = [
   './', 'index.html', 'manifest.webmanifest',

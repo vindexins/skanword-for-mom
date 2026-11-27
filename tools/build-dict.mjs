@@ -19,7 +19,7 @@ for (const lang of ['ru', 'uk']) {
   for (const f of files) {
     readFileSync(join(src, f), 'utf8').split('\n').forEach((raw, n) => {
       const line = raw.trim();
-      if (!line || line.startsWith('#')) return;
+      if (!line || line.startsWith('#') || line.includes('|x|')) return;
       const where = `${f}:${n + 1}`;
       const [w0, clue, lvl] = line.split('|');
       if (!clue) { warn.push(`${where} нет определения`); return; }
